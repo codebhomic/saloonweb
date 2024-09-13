@@ -1,0 +1,44 @@
+.container {
+    background-color: #fff;
+    max-width: 75vw;
+    margin: 3em auto;
+    padding: 2em;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h2 {
+    margin: 1em 1em;
+}
+
+.info {
+    margin: 2em 0;
+}
+
+.mx-10 {
+    margin: 0 2em;
+}
+
+.info p {
+    margin: 1em 0;
+}
+
+@media (min-width:1200px) {
+    .w-md-50 {
+        width: 40%;
+    }
+}
+
+@media (min-width:1500px) {
+    .container {
+        max-width: 50vw;
+    }
+}
+
+@media (max-width:1200px) {
+    .w-md-50 {
+        width: 75%;
+    }
+}

@@ -1,0 +1,219 @@
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    justify-content: center;
+}
+
+.flexwrap {
+    flex-wrap: wrap;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.m-10 {
+    margin: 3em 0;
+}
+
+.m-20 {
+    margin: 6em 0;
+}
+
+.mx-10 {
+    margin: 0 3em;
+}
+
+.mx-20 {
+    margin: 0 6em;
+}
+
+.py-10 {
+    padding: 3em 0;
+}
+
+.py-20 {
+    padding: 6em 0;
+}
+
+.px-10 {
+    padding: 0 3em;
+}
+
+.px-20 {
+    padding: 0 6em;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-white {
+    color: white;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.text-red {
+    color: red;
+}
+
+.bg-green {
+    background-color: rgb(49, 230, 49);
+}
+
+.flash {
+    padding: 10px;
+    margin: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.flash.info {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.btn {
+    text-decoration: none;
+    color: white;
+    background-color: orangered;
+    padding: 0.7em 1.5em;
+    border-radius: 4px;
+    display: block;
+    text-align: center;
+}
+
+.w-10 {
+    width: 10%;
+}
+
+.btn:hover {
+    background-color: darkorange;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: orangered;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 160px;
+    z-index: 1;
+    
+}
+
+.dropdown-content a {
+    padding: 0.5em 0.9em;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: darkorange;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: darkorange;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8em;
+    margin-bottom: 1em;
+    border: 0.1em solid #ccc;
+    border-radius: 0.5em;
+    font-size: 1em;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.btn {
+    margin-top: .7em;
+    background-color: orangered;
+    padding: 0.7em 1.5em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.btn a {
+    text-decoration: none;
+    color: white;
+}
+
+.btn:hover {
+    background-color: darkorange;
+}
+
+.w-100 {
+    width: 100%;
+}
+.capitalize{
+    text-transform: capitalize;
+}
+.uppercase{
+    text-transform: uppercase;
+}
+@media (min-width: 768px) {
+    .w-md-50 {
+        width: 50%;
+    }
+
+    .w-md-25 {
+        width: 25%;
+    }
+
+    .w-md-75 {
+        width: 75%;
+    }
+
+}
+
+.form-control:focus {
+    border: solid 0.1em darkorange;
+    box-shadow: 1px 2px 12px 0.5px darkorange;
+    outline: none;
+}
+
+@media (min-width: 1000px) {
+    .right-1{
+        right: 1%;
+    }
+}
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-content {
+        left: 40%;
+        top: 110%;
+    }
+    .dropdown-content:hover{
+        width: 50%;
+    }
+
+}

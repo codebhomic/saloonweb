@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% block title %}HomePage{% endblock title %}
+{% block pagescss %}
+<style>
+section{
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
+}
+/* Testimonial Section */
+.testimonial-section {
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 1em;
+    margin: 2em 0;
+}
+
+.testimonial-section h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 1em;
+    color: #e67e22;
+}
+
+.testimonials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.testimonial {
+    flex: 1 1 calc(33% - 1em);
+    background-color: #f5f5f5;
+    padding: 1em;
+    border-radius: 0.5em;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.testimonial:hover {
+    transform: translateY(-0.5em);
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-text {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 0.5em;
+}
+
+.testimonial-author {
+    font-size: 0.875em;
+    color: #e67e22;
+    text-align: right;
+}
+
+/* Gallery Section */
+.gallery-section {
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 1em;
+    margin-bottom: 2em;
+}
+
+.gallery-section h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 1em;
+    /* color: #e67e22; */
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.gallery-item {
+    flex: 1 1 calc(33% - 1em);
+    overflow: hidden;
+    border-radius: 0.5em;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 20em;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1);
+}
+
+.gallery-item:hover {
+    transform: translateY(-0.5em);
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .testimonial, .gallery-item {
+        flex: 1 1 calc(50% - 1em);
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial, .gallery-item {
+        flex: 1 1 100%;
+    }
+}
+</style>
+{% endblock pagescss %}
+{% block basetemp %}
+{% include 'flashmessages.html' %}
+<!-- about section start -->
+<section class="about-section" id="#about">
+    <div class="about-info">
+        <h2>about us</h2>
+        <p>
+            queens beauty studio is one of the best ladies saloon of barnala. it very well known for quality and
+            excellent customer services. we provide various services like makeups, hairstyle, pedicure,
+            manicure,etc. click on services button to book and details about it particularly.
+
+        </p>
+        <button class="btn"><a href="#services">services</a></button>
+    </div>
+    <div class="image-container">
+        <img src="https://lh3.googleusercontent.com/p/AF1QipPNgJJH92ErIo3cJK8_9DOjaCmJt5fl7Dfke3zu=s680-w680-h510"
+            class="zoom-image">
+    </div>
+</section>
+<!-- about section end -->
+<!-- services section start -->
+<section class="services-section" id="Services">
+    <h2>Our Services</h2>
+    <div class="service-boxes">
+        {% for service in services  %}
+            <div class="service-box">
+                <h3>{{service.title}}</h3>
+                <p>Price:- {{service.price}}</p>
+                <a class="btn" href="{{ url_for('booking.bookingservice',service_id=service.id) }}">Book</a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- services section end -->
+<!-- Testimonial Section -->
+<section class="testimonial-section">
+    <h2>Testimonials</h2>
+    <div class="testimonials">
+        <div class="testimonial">
+            <p class="testimonial-text">"The best salon experience I've ever had! Highly recommended!"</p>
+            <p class="testimonial-author">- Jane Doe</p>
+        </div>
+        <div class="testimonial">
+            <p class="testimonial-text">"Amazing service and very professional staff. Loved my new look!"</p>
+            <p class="testimonial-author">- John Smith</p>
+        </div>
+        <div class="testimonial">
+            <p class="testimonial-text">"A relaxing and rejuvenating experience every time I visit."</p>
+            <p class="testimonial-author">- Emily White</p>
+        </div>
+    </div>
+</section>
+
+ <!-- Gallery Section -->
+ <section class="gallery-section">
+    <h2>Gallery</h2>
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="{{ url_for('static', filename='img/gallery1.jpg') }}" alt="Gallery Image 1">
+        </div>
+        <div class="gallery-item">
+            <img src="{{ url_for('static', filename='img/gallery2.jpg') }}" alt="Gallery Image 2">
+        </div>
+        <div class="gallery-item">
+            <img src="{{ url_for('static', filename='img/gallery2.jpg') }}" alt="Gallery Image 3">
+        </div>
+        <div class="gallery-item">
+            <img src="{{ url_for('static', filename='img/gallery3.jpg') }}" alt="Gallery Image 4">
+        </div>
+        <div class="gallery-item">
+            <img src="{{ url_for('static', filename='img/gallery3.jpg') }}" alt="Gallery Image 5">
+        </div>
+        <div class="gallery-item">
+            <img src="{{ url_for('static', filename='img/gallery4.jpg') }}" alt="Gallery Image 6">
+        </div>
+    </div>
+</section>
+
+
+<!-- contact section start -->
+<section class="contact-section m-10" id="contact">
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        <form id="contactForm" action='{{ url_for("pages.contactsubmit") }}' method="post">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Ur Name" required>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" class="form-control"id="phone" name="phone" maxlength="10" placeholder="Enter Ur Phone Number" required>
+            <label for="service">What services you want:</label>
+            <select id="service" class="form-control" name="service" required>
+                <option value="hairstyle">Hairstyle</option>
+                <option value="makeup">Makeup</option>
+                <option value="manicure">Manicure</option>
+                <option value="pedicure">Pedicure</option>
+                <option value="wax">Wax</option>
+                <option value="spa">Spa</option>
+                <option value="others">Others</option>
+            </select>
+            <label for="message">Message:</label>
+            <textarea id="message" class="form-control" name="message" placeholder="Enter Ur Message" required></textarea> <button
+                type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="contact-info">
+        <h2>Our Salon</h2>
+        <p>123 Beauty Street</p>
+        <p>Cityville, ST 12345</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>Email: contact@beautysalon.com</p>
+    </div>
+    <div id="responseMessage"></div>
+</section>
+<!-- contact section end -->
+{% endblock basetemp %}

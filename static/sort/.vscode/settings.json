@@ -1,0 +1,20 @@
+{
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "compressed",
+      "extensionName": ".min.css",
+      "savePath": "/",
+      "savePathReplacementPairs": null
+    },
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "/",
+      "savePathReplacementPairs": null
+    }
+  ],
+  "eslint.experimental.useFlatConfig": true,
+
+  "liveSassCompile.settings.showOutputWindowOn": "Warning",
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

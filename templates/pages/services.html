@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block basetemp %}
+<!-- services section start -->
+<section class="services-section" id="Services">
+    <h2>Our Services</h2>
+    <div class="service-boxes">
+        {% for service in services  %}
+            <div class="service-box">
+                <h3>{{service.title}}</h3>
+                <p>Price:- {{service.price}}</p>
+                <a class="btn" href="{{ url_for('booking.bookingservice',service_id=service.id) }}">Book</a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- services section end -->
+{% endblock basetemp %}

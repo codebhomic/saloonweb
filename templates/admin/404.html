@@ -1,0 +1,17 @@
+{% extends 'adminbase.html' %}
+{% block title %}
+Users Data
+{% endblock title %}
+{% block adminbasetemp %}
+{% block admincss %}
+<link rel="stylesheet" href="{{ url_for('static', filename='CSS/view_data.css') }}" />
+
+{% endblock admincss %}<!-- data-section section start -->
+<section class="container">
+    {% include 'flashmessages.html' %}
+    <h2>404 Page Not Found </h2>
+    
+
+</section>
+<!-- data-section section end -->
+{% endblock adminbasetemp %}

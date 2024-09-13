@@ -1,0 +1,86 @@
+/* styles.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    font-size: 1em;
+}
+
+.container {
+    max-width: 40em;
+    margin: 2em auto;
+    padding: 2em;
+    background-color: #ffffff;
+    border-radius: 1em;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 62.5em) { /* 1000px */
+    .container {
+        max-width: 62.5em;
+    }
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 1em;
+    font-family: 'Georgia', serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 1.5em;
+    padding: 0;
+}
+
+legend {
+    font-weight: bold;
+    color: #444;
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    padding: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.8em;
+    margin-bottom: 1em;
+    border: 0.1em solid #ccc;
+    border-radius: 0.5em;
+    font-size: 1em;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+.checkbox-group {
+    margin-bottom: 1em;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+}

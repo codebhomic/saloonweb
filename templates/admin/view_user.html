@@ -1,0 +1,38 @@
+{% extends 'adminbase.html' %}
+{% block title %}
+User Data({{user.id}})
+{% endblock title %}
+{% block admincss %}
+<link rel="stylesheet" href="{{ url_for('static',filename='CSS/view_data.css') }}">
+{% endblock admincss %}
+{% block adminbasetemp %}
+<div class="container">
+    <h2 class="capitalize">View user Data by Id</h2>
+    <div class="info flex flexwrap">
+        <div class="w-md-50 mx-10">User Id:-<p class="form-control">{{ user.id }}</p></div>
+        <div class="w-md-50 mx-10">User Name:-<p class="form-control">{{ user.user_name or user.name }}</p></div>
+        <div class="w-md-50 mx-10">User Email Address:-<p class="form-control">{{ user.user_email_address or user.email_address }}</p></div>
+        <div class="w-md-50 mx-10">User Phone Number:-<p class="form-control">{{ user.user_phone_number or user.phone_number }}</p></div>
+        <div class="w-md-50 mx-10">User Data Created:-<p class="form-control">{{ user.date_created}}</p></div>
+    </div> 
+    <a class="btn w-md-75  mx-10">back</a>
+</div>
+<!-- data-section section end -->
+{% endblock adminbasetemp %}
+{% block adminjs %}
+    <script>
+        document.querySelectorAll(".btn").forEach(e => {
+            e.addEventListener("click",(e)=>{
+                if (document.referrer){
+                    if(window.location.href==window.location.origin+window.location.pathname){
+                        window.location.href=window.location.origin+"{{url_for('admin.view_users')}}"
+                    }else{
+                        window.location.href=document.referrer
+                    }
+                }else{
+                    window.location.href=window.location.origin+"{{url_for('admin.view_users')}}"
+                }
+            })
+        })
+    </script>
+{% endblock adminjs %}

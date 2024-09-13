@@ -1,0 +1,11 @@
+{% extends 'adminbase.html' %}
+{% block title %}Admin Dashboard{% endblock title %}
+{% block admincss %}<link rel="stylesheet" href="{{ url_for('static',filename='CSS/profile.css') }}">{% endblock admincss %}
+{% block adminbasetemp %} 
+    <div class="dashboard-container">
+        <div class="content capitalize">
+            <h1>welcome, {% if current_user.is_authenticated %}{{ current_user.admin_name }}{% endif %} - Admin Dashboard</h1>
+            {% include 'flashmessages.html' %}
+        </div>
+    </div>
+{% endblock adminbasetemp %}

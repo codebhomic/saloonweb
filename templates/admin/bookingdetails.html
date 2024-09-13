@@ -1,0 +1,97 @@
+{% extends 'adminbase.html' %}
+{% block title %}
+All Bookings BY users And client Filled
+{% endblock title %}
+{% block admincss %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sort/sortable.min.css') }}" />
+<style>
+    .flex div .btn{
+        height: 80%;
+        margin: 0.5em;
+    }
+    .flex{
+        align-items: center;
+        justify-content: space-between;
+    }
+</style>
+{% endblock admincss %}
+{% block adminbasetemp %}
+<!-- data-section section start -->
+<section class="data-section">
+    <div class="flex flexwrap">
+        {% include 'flashmessages.html' %}
+        <h2>All Bookings BY users And client</h2>
+        <div class="flex flexwrap">
+            {% if typeof == None %}
+            <a href="{{ url_for('admin.booking_details',type='user') }}" class="btn w-25">Only User Data</a>
+            <a href="{{ url_for('admin.booking_details',type='client') }}" class="btn 2-25">Only client Data</a>
+            {% else %}
+            <a href="{{ url_for('admin.booking_details') }}" class="btn 2-25">All Data</a>
+            {% endif %}
+            {% if typeof == 'client' %}
+            <a href="{{ url_for('admin.booking_details',type='user') }}" class="btn w-25">Only User Data</a>
+            {% endif %}
+            {% if typeof == 'user' %}
+            <a href="{{ url_for('admin.booking_details',type='client') }}" class="btn 2-25">Only client Data</a>
+            {% endif %}
+    </div>
+</div>
+    <div class="table-container">
+        <table id="dataTable" class="sortable">
+            <thead>
+                <tr>
+                    <th>User id/Cleint Id</th>
+                    <th>service</th>
+                    <th>date</th>
+                    <th>time</th>
+                    <th class="no-sort">status</th>
+                    <th class="no-sort">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be inserted here -->
+                    {% for binfot in binfo %}
+                    <tr>
+                        <td>
+                            {{ binfot.user_id or binfot.client_id }}
+                            {% if binfot.user_id %}
+                               <a href="{{ url_for('admin.view_users',userid=binfot.user_id) }}">(user)</a>
+                               {% else %}
+                               <a href="{{ url_for('admin.view_clients',userid=binfot.client_id) }}">(client)</a>
+                            {% endif %}
+                        </td>
+                        <td>{% for serv in serv %}
+                            {% if binfot.service_id==serv.id %}
+                                {{ serv.title }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ binfot.date }}</td>
+                    <td>{{ binfot.time }}</td>
+                        <td>{{ binfot.status }}</td>
+                        <td>Cancel <a href="{{ url_for('admin.deletebooking',id=binfot.id) }}">Delete</a></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center bg-red text-white">No Data Found</td>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+        <div class="m-10 flex px-10"> 
+            {% if binfo.has_prev %}
+            <a href="{{ url_for('admin.booking_details', page=binfo.prev_num) }}" class="btn mx-10 w-10">Previous</a>
+            {% endif %}
+            Page {{ binfo.page }} of {{ binfo.pages }}
+            {% if binfo.has_next %}
+            <a href="{{ url_for('admin.booking_details', page=binfo.next_num) }}" class="btn mx-10 w-10">Next</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- data-section section end -->
+{% endblock adminbasetemp %}
+{% block adminjs %}
+<script src="{{ url_for('static', filename='sort/sortable.min.js') }}"></script>
+
+{% endblock adminjs %}

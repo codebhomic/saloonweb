@@ -1,0 +1,181 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.navbar {
+    background-color: orangered;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: relative;
+}
+
+.navbar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0.5em 0;
+    display: flex;
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+}
+
+.nav-links li {
+    margin-left: 0.3em;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+}
+
+.nav-links li a:hover {
+    background-color: darkorange;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.content {
+    padding: 2em;
+    text-align: center;
+}
+
+.content p {
+    margin-top: 0;
+}
+
+.data-section {
+    padding: 2em;
+    background-color: white;
+    margin-top: 1em;
+}
+
+.data-section h2 {
+    margin-bottom: 1em;
+}
+
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 0.5em;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+tbody a {
+    text-decoration: none;
+    color: Red;
+    font-weight: bold;
+}
+
+tbody a:hover {
+    color: rgb(233, 146, 146);
+    text-decoration: underline;
+}
+
+.showmessaagebox{
+    border: 0.2em solid black;
+    border-radius: 1em;
+    padding: 1em 2em;
+    width: 20em;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    background-color: white;
+    color: black;
+    box-shadow: 0 19px 21px 0 rgba(0, 0, 0, 0.5), 0 31px 20px 0 rgba(0, 0, 0, 0.3);
+    display: none;
+    height: 70vh;
+}
+
+.showmessaagebox p{
+    overflow-y: auto;
+}
+.showmessaagebox button{
+    width: 6em;
+    margin: auto;
+    margin-top: 1em;
+}
+
+
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        background-color: orangered;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-height: 90vh;
+    }
+
+    .nav-links li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        padding: 1em;
+    }
+
+    .nav-links li a {
+        width: 100%;
+        text-align: left;
+        font-size: large;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-links.active {
+        display: flex;
+        max-height: 500px;
+    }
+
+    .showmessaagebox{
+        top: 0;
+        left: 0;
+        height: 90vh;
+    }
+    .dropdown-content{
+        right: 40%;
+    }
+}

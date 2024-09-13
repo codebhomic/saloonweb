@@ -1,0 +1,33 @@
+<li><a href="{{ url_for('admin.getcontact') }}">Contact Forms</a></li>
+<li class="dropdown"><a class="dropbtn">Booking Details</a>
+    <div class="dropdown-content">
+        <a href="{{ url_for('admin.booking_details') }}">View Bookings</a>
+        <a href="{{ url_for('admin.booking_details',type='user') }}">Only User Data</a>
+        <a href="{{ url_for('admin.booking_details',type='client') }}">Only client Data</a>
+
+    </div>
+</li>
+<li class="dropdown"><a class="dropbtn">Services</a>
+    <div class="dropdown-content">
+        <a href="{{ url_for('admin.view_services') }}">View Services</a>
+        <a href="{{ url_for('admin.add_services') }}">Add Services</a>
+    </div>
+</li>
+<li class="dropdown"><a class="dropbtn">Clients/Users</a>
+    <div class="dropdown-content">
+        <a href="{{ url_for('admin.view_clients') }}">
+            Clients Registered</a>
+        <a href="{{ url_for('admin.view_users') }}">
+            User Registered</a>
+    </div>
+</li>
+<li class="dropdown"><a class="dropbtn">{% if current_user.is_authenticated %}{{ current_user.admin_name }}{% endif
+        %}!!</a>
+    <div class="dropdown-content right-1">
+        <a href="{{ url_for('pages.home') }}">View Website</a>
+        <a href="{{ url_for('admin.profile') }}">Profile</a>
+        <a href="{{ url_for('admin.profile_details') }}">Edit Details</a>
+        <a href="{{ url_for('admin.profile_change_password') }}">Change Password</a>
+        <a href="{{ url_for('admin.admin_logout') }}" id="logout">Logout</a>
+    </div>
+</li>

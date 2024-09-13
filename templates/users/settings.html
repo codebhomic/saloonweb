@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}User Settings{% endblock title %}
+{% block pagescss %}
+<link rel="stylesheet" href="{{ url_for('static',filename='CSS/view_data.css') }}">
+<style>
+    .errors {
+        background-color: red;
+        color: white;
+        padding: 1em 2em;
+        margin: 1em auto;
+    }
+
+    .errors li {
+        list-style: none;
+    }
+
+    .form-control{
+        margin: 0.5em 0;
+    }
+    .btn {
+        padding: 0.5em 0;
+        height: max-content;
+        margin-top: 1em;
+    }
+</style>
+{% endblock pagescss %}
+{% block basetemp %}
+<div class="container">
+    {% if type == 'change_password' %}
+    <h2 class="capitalize mx-10">Change Password</h2>
+    <form class="info flex flexwrap flex-col" action="{{ url_for('users.profile_change_password') }}" method="post">
+        {{ form.csrf_token }}
+        {% if form.errors %}
+        <ul class="errors">
+            {% for error in form.current_password.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+            {% for error in form.new_password.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+            {% for error in form.confirm_password.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+        <div class="flex flexwrap mx-10">
+            {{ form.current_password.label }}
+            {{ form.current_password(class="form-control") }}
+        </div>
+        <div class="flex flexwrap mx-10">
+            {{ form.new_password.label }}
+            {{ form.new_password(class="form-control") }}
+        </div>
+        <div class="flex flexwrap mx-10">
+            {{ form.confirm_password.label }}
+            {{ form.confirm_password(class="form-control") }}
+        </div>
+        <div class="flex flexwrap mx-10">
+            {{ form.save(class="btn w-md-25") }}
+            <a class="btn w-md-25 mx-10" href="{{ url_for('users.profile')}}">Back</a>
+        </div>
+        {% else %}
+        <h2 class="capitalize mx-10"> Edit Profile Details</h2>
+        <form class="info flex flexwrap flex-col" action="{{ url_for('users.profile_details') }}" method="post">
+        {{ form.csrf_token }}
+        {% if form.errors %}
+        <ul class="errors">
+            {% for error in form.name.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+            {% for error in form.phone_number.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+        <div class="flex flexwrap mx-10">
+            {{ form.name.label }}
+            {{ form.name(class="form-control",value=current_user.user_name) }}
+        </div>
+        <div class="flex flexwrap mx-10">
+            {{ form.phone_number.label }}
+            {{ form.phone_number(class="form-control",value=current_user.user_phone_number) }}
+        </div>
+        <div class="flex flexwrap mx-10">
+            {{ form.save(class="btn w-md-25") }}
+            <a class="btn w-md-25 mx-10" href="{{ url_for('users.profile')}}">Back</a>
+        </div>
+        {% endif %}
+</div>
+{% endblock basetemp %}

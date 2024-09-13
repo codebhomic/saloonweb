@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}{% if register %}Sign Up{% else %}Sign In{% endif %}{% endblock title %}
+{% block pagescss %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/forms.css') }}">
+{% endblock pagescss %}
+{% block basetemp %}
+<div class="container">
+<div class="form-container">
+    <h1>User {% if register %}Sign Up{% else %}Sign In{% endif %}</h1>
+    {% if register %}
+    <form method="post" action="{{ url_for('users.signup') }}">
+        {{ form.csrf_token }}
+        {% if form.errors %}
+    <ul class="errors">
+    {% for error in form.user_name.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+    {% for error in form.user_phone_number.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+    {% for error in form.user_email_address.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+    {% for error in form.user_password.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+    {% for error in form.user_confirm_password.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+    </ul>
+{% endif %}
+        {{ form.user_name.label }}
+        {{ form.user_name() }}
+        {{ form.user_phone_number.label }}
+        {{ form.user_phone_number() }}
+        {{ form.user_email_address.label }}
+        {{ form.user_email_address() }}
+        {{ form.user_password.label }}
+        {{ form.user_password() }}
+        {{ form.user_confirm_password.label }}
+        {{ form.user_confirm_password() }}
+ {{form.signup()}}
+    </form>
+    <p class="switch-form">
+        Already have an account? <a href="{{ url_for('users.signin') }}" id="switch-to-signin">Sign In</a>
+    </p>
+    
+    {% else %}
+    <form method="post" action="{{ url_for('users.signin') }}">
+        {{ form.csrf_token }}
+        {% if form.errors %}
+    <ul class="errors">
+    {% for error in form.user_email_address.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+    {% for error in form.user_password.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+    </ul>
+{% endif %}
+        {{ form.user_email_address.label }}
+        {{ form.user_email_address() }}
+        {{ form.user_password.label }}
+        {{ form.user_password() }}
+ {{form.signin()}}
+        </form>
+        <p class="switch-form">
+            Don't have an account? <a href="{{ url_for('users.signup') }}" id="switch-to-signup">Sign Up</a>
+        </p>
+
+        {% endif %}
+   
+    </div>
+</div>
+
+{% endblock basetemp %}

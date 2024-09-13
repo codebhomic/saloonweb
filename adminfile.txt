@@ -1,0 +1,6 @@
+      adminsubmit = AdminUser(
+    admin_name = "Bhoumic Garg",
+    admin_phone_number = "9999999",
+    admin_email_address = "bhoumicgarg04@gmail.com",
+    admin_password = "KhushiKaku1234"
+        )

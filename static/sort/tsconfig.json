@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "ES2015",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "outDir": ".",
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "strict": false,
+    "target": "ES5",
+    "allowSyntheticDefaultImports": true,
+    "declaration": true
+  },
+  "compileOnSave": false,
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

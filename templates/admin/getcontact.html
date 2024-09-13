@@ -1,0 +1,100 @@
+{% extends 'adminbase.html' %}
+{% block title %}
+Contact Us Filled
+{% endblock title %}
+{% block admincss %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sort/sortable.min.css') }}" />
+
+{% endblock admincss %}
+{% block adminbasetemp %}
+<!-- data-section section start -->
+<section class="data-section">
+    {% include 'flashmessages.html' %}
+    <h2>Submitted Data</h2>
+    <div class="table-container">
+        <table id="dataTable" class="sortable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Services</th>
+                    <th>Message</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be inserted here -->
+                {% if contacts.items %}
+
+                {% for contact in contacts.items %}
+                <tr>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.phone_number}}</td>
+                    <td>{{contact.service}}</td>
+                    <td><span class="short-message">{{ contact.message[:20] }}</span>
+                        {% if contact.message|length > 20 %}
+                        <span id="viewmore" class="text-red"
+                            onclick="viewmore('{{contacts.items.index(contact)}}')">...more</span>
+                        <div class="showmessaagebox" id="showmessagebox{{contacts.items.index(contact)}}">
+                            <h2>Message</h2>
+                            <p>{{ contact.message }}</p>
+                            <button class="btn" id="close" onclick="viewclose('{{contacts.items.index(contact)}}')">close</button>
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td><a urltosend="{{ url_for('admin.deletecontact',id=contact.id) }}" onclick="deletecontact(this)" >delete</a></td>
+                </tr>
+                {% endfor %}
+                <script>
+                    function deletecontact(e){
+                        userResponse = confirm("Do You Really want to delete ")
+                        if (userResponse){
+                            window.location.href=e.getAttribute("urltosend")
+                        }
+                    }
+                    function viewmore(index) {
+                        const MessageBox = document.getElementById("showmessagebox" + index)
+                        if (MessageBox.style.display == 'none') {
+                            MessageBox.style.display = 'flex';
+                        } else {
+                            MessageBox.style.display = 'none';
+                        }
+
+                    }
+                    function viewclose(index) {
+                        const MessageBox = document.getElementById("showmessagebox" + index)
+                        if (MessageBox.style.display == 'flex') {
+                            MessageBox.style.display = 'none';
+                        } else {
+                            MessageBox.style.display = 'none';
+                        }
+
+                    }
+                    // document.getElementById("viewmore").addEventListener("click",viewmore)
+                    // document.getElementById("close").addEventListener("click",close)
+
+                </script>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center bg-red text-white">No Data Found</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <div class="m-10 flex px-10"> 
+            {% if contacts.has_prev %}
+            <a href="{{ url_for('admin.getcontact', page=contacts.prev_num) }}" class="btn mx-10 w-10">Previous</a>
+            {% endif %}
+            Page {{ contacts.page }} of {{ contacts.pages }}
+            {% if contacts.has_next %}
+            <a href="{{ url_for('admin.getcontact', page=contacts.next_num) }}" class="btn mx-10 w-10">Next</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- data-section section end -->
+{% endblock adminbasetemp %}
+{% block adminjs %}
+<script src="{{ url_for('static', filename='sort/sortable.min.js') }}"></script>
+
+{% endblock adminjs %}

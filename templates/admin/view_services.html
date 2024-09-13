@@ -1,0 +1,72 @@
+{% extends 'adminbase.html' %}
+{% block title %}
+services Data
+{% endblock title %}
+{% block adminbasetemp %}
+
+{% block admincss %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sort/sortable.min.css') }}" />
+
+{% endblock admincss %}<!-- data-section section start -->
+<section class="data-section">
+    {% include 'flashmessages.html' %}
+    <h2>All services Data</h2>
+    <div class="table-container">
+        <table id="dataTable" class="sortable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Duration</th>
+                    <th>Edit/View</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% if services.items %}
+                
+                {% for service in services.items %}
+                <tr>
+                    <td>{{service.title}}</td>
+                    <td>{{service.price}}</td>
+                    <td>{{service.duration}}</td>
+                    <td><a href="{{ url_for('admin.view_edit_services',service_id=service.id) }}">Edit/View</a></td>
+                    <td><a urltosend="{{ url_for('admin.deleteservice',service_id=service.id) }}" onclick="deleteservice(this)">delete</a></td>
+                </tr>
+                {% endfor %}
+                <script>
+                    function deleteservice(e){
+                        serviceResponse = confirm("Do You Really want to delete ")
+                        if (serviceResponse){
+                            window.location.href=e.getAttribute("urltosend")
+                        }
+                    }
+                </script>
+
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-center bg-red text-white">No Data Found</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table> 
+        {% if services.items %}
+        <div class="flex flex-center px-10">
+            <p>Page {{ services.page }} of {{ services.pages }}</p>
+            {% if services.has_prev %}
+            <a href="{{ url_for('admin.view_services', page=services.prev_num) }}" class="btn mx-10 w-10">Previous</a>
+            {% endif %}
+            {% if services.has_next %}
+            <a href="{{ url_for('admin.view_services', page=services.next_num) }}" class="btn mx-10 w-10">Next</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+<!-- data-section section end -->
+{% endblock adminbasetemp %}
+{% block adminjs %}
+<script src="{{ url_for('static', filename='sort/sortable.min.js') }}"></script>
+
+{% endblock adminjs %}

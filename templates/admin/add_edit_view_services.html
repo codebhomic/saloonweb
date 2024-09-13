@@ -1,0 +1,82 @@
+{% extends 'adminbase.html' %}
+{% block title %}
+services Data
+{% endblock title %}
+{% block admincss %}
+<style>
+    .container {
+        background-color: #fff;
+        max-width: 75vw;
+        margin: 2em auto;
+        padding: 2em;
+        border-radius: 1em;
+    }
+
+    .form_info h2 {
+        text-align: center;
+    }
+
+    .form label {
+        margin-bottom: 0.5em !important;
+    }
+
+    form textarea {
+        min-height: 10em;
+    }
+</style>
+{% endblock admincss %}
+{% block adminbasetemp %}
+
+<div class="container">
+<div class="form-info">
+    {% if service %}
+    <h2>View/Edit Services</h2>
+    {% else %}
+        <h2>Add Services</h2>
+    {% endif %}
+</div>
+{% if service %}
+    <form method="post" action="{{ url_for('admin.view_edit_services',service_id=service.id) }}" class="form">
+{% else %}
+    <form method="post" action="{{ url_for('admin.add_services') }}" class="form">
+{% endif %}
+    {{ form.csrf_token }}
+    {% if form.errors %}
+    <ul class="errors">
+        {% for error in form.name.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+        {% for error in form.description.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+        {% for error in form.price.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+        {% for error in form.duration.errors %}<li>{{ error.capitalize() }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+    {% if service %}
+        {{ form.name.label }}
+        {{ form.name(value=service.title) }}
+        {{ form.description.label }}
+        {{ form.description() }}
+        {{ form.price.label }}
+        {{ form.price(value=service.price) }}
+        {{ form.duration.label }}
+        {{ form.duration(value=service.duration) }}
+        <div class="flex">
+            {{form.submit(class='btn w-md-25')}}
+            <a href="{{ url_for('admin.view_services') }}" class="btn w-md-25 mx-10">Back</a>
+        </div>
+        <script>
+            document.getElementsByTagName("textarea")[0].value="{{service.desc}}"
+        </script>
+    {% else %}
+        {{ form.name.label }}
+        {{ form.name() }}
+        {{ form.description.label }}
+        {{ form.description() }}
+        {{ form.price.label }}
+        {{ form.price() }}
+        {{ form.duration.label }}
+        {{ form.duration() }}
+        {{form.submit(class='btn w-md-25')}}
+    {% endif %}
+        
+</form>
+</div>
+{% endblock adminbasetemp %}

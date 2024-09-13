@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block basetemp %}
+<!-- contact section start -->
+<section class="contact-section m-10" id="contact">
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        <form id="contactForm" action='{{ url_for("pages.contactsubmit") }}' method="post">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Ur Name" required>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" class="form-control"id="phone" name="phone" maxlength="10" placeholder="Enter Ur Phone Number" required>
+            <label for="service">What services you want:</label>
+            <select id="service" class="form-control" name="service" required>
+                <option value="hairstyle">Hairstyle</option>
+                <option value="makeup">Makeup</option>
+                <option value="manicure">Manicure</option>
+                <option value="pedicure">Pedicure</option>
+                <option value="wax">Wax</option>
+                <option value="spa">Spa</option>
+                <option value="others">Others</option>
+            </select>
+            <label for="message">Message:</label>
+            <textarea id="message" class="form-control" name="message" placeholder="Enter Ur Message" required></textarea> <button
+                type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="contact-info">
+        <h2>Our Salon</h2>
+        <p>123 Beauty Street</p>
+        <p>Cityville, ST 12345</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>Email: contact@beautysalon.com</p>
+    </div>
+    <div id="responseMessage"></div>
+</section>
+    <!-- contact section end -->   
+    
+
+    {% endblock basetemp %}

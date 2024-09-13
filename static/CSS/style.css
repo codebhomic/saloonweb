@@ -1,0 +1,307 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.mainsection{
+    min-height: 90vh;
+    /* padding: 6em 0; */
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+/* header sytling start */
+footer {
+    background-color: orangered;
+}
+
+header{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    margin-bottom: 2em;
+    background-color: orangered;
+}
+
+.navbar {
+    background-color: orangered;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: relative;
+}
+
+.navbar-brand {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+}
+
+.navbar-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0.5em  0;
+    display: flex;
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+}
+
+.navbar-links li {
+    display: inline;
+}
+
+.navbar-links li a {
+    text-decoration: none;
+    color: white;
+    padding: 1em;
+    transition: background-color 0.2s ease;
+}
+
+.navbar-links a:hover {
+    background-color: darkorange;
+    border: 0.1em solid darkorange;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* header styling end */
+/* about section styling start */
+.about-section {
+    padding: 1em 2em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2em 0;
+}
+
+.about-section div h2 {
+    text-transform: capitalize;
+}
+.about-info, .image-container{
+    padding: 1em;
+}
+.about-info, .image-container img{
+    transition: transform 0.3s ease-in;
+}
+.about-info, .image-container img:hover{
+    transform: translate(-0.5em);
+}
+/* about section styling end */
+
+
+.services-section {
+    background-color: orangered;
+    color: white;
+    padding: 2em;
+    text-align: center;
+}
+
+.services-section h2 {
+    margin-bottom: 1em;
+    transition: text-decoration 0.2s ease-in;
+}
+
+.services-section h2:hover {
+    margin-bottom: 1em;
+    text-decoration: underline;
+}
+
+.service-boxes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.service-box {
+    background-color: white;
+    color: black;
+    padding: 1em;
+    margin: 1em auto;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px orangered;
+    transition: transform 0.3s, box-shadow 0.1s ease-in;
+}
+
+.service-box:hover{
+    transform: translateY(-0.5em);
+    box-shadow: 3px 5px 17px 4px rgb(235, 196, 148);
+}
+
+.service-box .btn{
+    margin: 0.8em auto;
+    background-color: white;
+    color: black;
+    border: solid 0.15em darkorange;
+    border-radius: 0.5em;
+}
+.service-box .btn:hover{
+    color: white;
+}
+
+.service-box h3 {
+    margin-top: 0;
+}
+
+.service-box p {
+    margin: 0.5em 0 0;
+}
+
+/* services section styling end */
+
+.image-container {
+    overflow: hidden;
+    /* Hide overflow to maintain image container bounds */
+    width: 98%;
+    /* Set a fixed width for the image container */
+    /* position: relative; */
+    height:50%;
+    /* Set a fixed height for the image container */
+}
+
+.zoom-image {
+    /* width: 110%;
+    height: 100%;
+    transform: scale(1.8);
+    position: absolute; */
+    /* Set absolute positioning to the image */
+    /* top: -20%;Initial top position */
+    right: -20%;
+    /* Initial left position */
+    /*transition: transform 0.5s ease;  Smooth transition effect */
+}
+
+/* 
+.image-container:hover .zoom-image {
+    transform: scale(2.2);
+} */
+
+
+.contact-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+    background-color: white;
+    flex-flow: wrap;
+}
+
+.contact-form, .contact-info {
+    flex: 1;
+    padding: 1em;
+}
+
+.contact-form {
+    margin-right: 2em;
+}
+
+.contact-form h2 {
+    margin-bottom: 1em;
+    transition: text-decoration 0.2s ease-in;
+}
+
+.contact-form h2:hover {
+    margin-bottom: 1em;
+    text-decoration: underline;
+}
+
+.contact-form label {
+    display: block;
+    margin: 0.5em 0 0.2em;
+}
+
+.contact-form textarea{
+    height: 10em;
+}
+.contact-form button {
+    background-color: orangered;
+    color: white;
+    padding: 0.7em 1.5em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.contact-form button:hover {
+    background-color: darkorange;
+}
+
+.contact-info h2 {
+    margin-bottom: 1em;
+    transition: text-decoration 0.2s ease-in;
+}
+
+.contact-info h2:hover {
+    margin-bottom: 1em;
+    text-decoration: underline;
+}
+
+.contact-info p {
+    margin: 0.5em 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .navbar-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        background-color: orangered;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-height: 100vh;
+    }
+
+    .navbar-links li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        padding: 1em;
+    }
+
+    .navbar-links li a {
+        width: 100%;
+        text-align: left;
+        font-size: large;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .navbar-links.active {
+        display: flex;
+        max-height: 500px;
+    }
+
+    .about-section{
+        margin: 5em 0;
+        flex-flow: wrap-reverse;
+    }
+
+    .about-info{
+        margin: 0.8em 0;
+    }
+    
+    .contact-section{
+        flex-direction: column;
+        /* flex-flow: wrap-reverse; */
+    }
+}
+
+/* @media (max-width: 680px) {
+    .contact-section{
+        flex-flow: wrap-reverse;
+    }
+} */

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+Users Data
+{% endblock title %}
+{% block basetemp %}
+{% block pagecss %}
+<link rel="stylesheet" href="{{ url_for('static', filename='CSS/view_data.css') }}" />
+
+{% endblock pagecss %}<!-- data-section section start -->
+<section class="container">
+    {% include 'flashmessages.html' %}
+    <h2>404 Page Not Found </h2>
+    
+
+</section>
+<!-- data-section section end -->
+{% endblock basetemp %}

@@ -1,0 +1,104 @@
+{% extends 'adminbase.html' %}
+{% block title %}
+{% if typeof == 'client' %}
+clients Data
+{% endif %}
+{% if typeof == 'user' %}
+Users Data
+{% endif %}
+{% endblock title %}
+{% block adminbasetemp %}
+{% block admincss %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sort/sortable.min.css') }}" />
+{% endblock admincss %}<!-- data-section section start -->
+<section class="data-section">
+    {% include 'flashmessages.html' %}
+    <h2>All {% if typeof == 'client' %}
+        clients Data
+        {% endif %}
+        {% if typeof == 'user' %}
+        Users Data
+       {% endif %}</h2>
+    <div class="flex flexwrap" style="margin-bottom: 0.4em;">
+        {% if typeof == 'client' %}
+        <a href="{{ url_for('admin.view_users') }}" class="btn w-25">Only User</a>
+        {% endif %}
+        {% if typeof == 'user' %}
+        <a href="{{ url_for('admin.view_clients') }}" class="btn 2-25">Only client</a>
+        {% endif %}
+    </div>
+    <div class="table-container">
+        <table id="dataTable" class="sortable">
+            <thead>
+                <tr>
+                    <th>User Id</th>
+                    <th>User Name</th>
+                    <th>User Phone Number</th>
+                    <th>User Email Address</th>
+                    <th>User Date Created </th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be inserted here -->
+                {% if users.items %}
+                
+                {% for user in users.items %}
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>
+                        {% if user.name %}
+                        <a href="{{url_for('admin.view_clients',userid=user.id)}}">
+                        {% else %}
+                        <a href="{{url_for('admin.view_users',userid=user.id)}}">
+                        {% endif %}
+                            
+                            {{user.user_name or user.name}}</a></td>
+                    <td>{{user.user_phone_number or user.phone_number}}</td>
+                    <td>{{user.user_email_address or user.email_address}}</td>
+                    <td>{{user.date_created or user.date_created}}</td>
+                    
+                    <td>{% if user.user_name %}
+                        <a urltosend="{{ url_for('admin.deleteuser',id=user.id) }}" onclick=deleteuser(this)>
+                        {% else %}
+                        <a urltosend="{{ url_for('admin.deleteclient',id=user.id) }}" onclick=deleteuser(this)>
+                        {% endif %}  
+                        delete</a></td>
+                </tr>
+                {% endfor %}
+                <script>
+
+                    function deleteuser(e){
+                        userResponse = confirm("Do You Really want to delete ")
+                        if (userResponse){
+                            window.location.href=e.getAttribute("urltosend")
+                        }
+                    }
+                </script>
+
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center bg-red text-white">No Data Found</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        {% if users.items|length > 10 %}
+        <div class="m-10 flex px-10">
+            {% if users.has_prev %}
+            <a href="{{ url_for('admin.view_users', page=users.prev_num) }}" class="btn mx-10 w-10">Previous</a>
+            {% endif %}
+            Page {{ users.page }} of {{ users.pages }}
+            {% if users.has_next %}
+            <a href="{{ url_for('admin.view_users', page=users.next_num) }}" class="btn mx-10 w-10">Next</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+<!-- data-section section end -->
+{% endblock adminbasetemp %}
+{% block adminjs %}
+<script src="{{ url_for('static', filename='sort/sortable.min.js') }}"></script>
+
+{% endblock adminjs %}

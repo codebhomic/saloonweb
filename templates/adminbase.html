@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %} - Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='CSS/admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='CSS/utility.css') }}">
+    {% block admincss %}{% endblock admincss %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Admin Dashboard</div>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <ul class="nav-links">
+            {% include 'admin_nav.html' %}
+        </ul>
+    </nav>
+    {% block adminbasetemp %}
+    {% endblock adminbasetemp %}
+    {% block adminjs %}{% endblock adminjs %}
+    <script src="{{ url_for('static',filename='JS/admin.js') }}"></script>
+    
+</body>
+</html>

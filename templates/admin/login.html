@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='CSS/admin_login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='CSS/utility.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        {% include 'flashmessages.html' %}
+        <h2>Admin Login</h2>
+        <form id="loginForm" action="{{ url_for('admin.admin_login_submit') }}" method="post">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="page" id="page" name="page" value="{{ page }}" style="display: none;">
+
+            <button type="submit">Login</button>
+        </form>
+        <div id="loginMessage"></div>
+        <a href="{{ url_for('pages.home') }}" style="color: red;text-decoration: none;">back to home</a>
+    </div>
+</body>
+</html>

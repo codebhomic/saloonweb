@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}Book an Appointment{% endblock title %}
+{% block pagescss %}
+<link rel="stylesheet" href="{{ url_for('static', filename='CSS/booking_details.css') }}">
+{% if form.errors %}
+<style>
+    .errors {
+        background-color: red;
+        padding: 1em;
+        margin: 2em 0;
+        color: white;
+        list-style: none;
+        font: bold;
+    }
+</style>
+{% endif %}
+{% endblock pagescss %}
+{% block basetemp %}
+<div class="container">
+    <h1>Book Your Appointment</h1>
+    {% if form.errors %}
+    <div class="errors">
+        {% for error in form.name.errors %}{{ error.capitalize() }}{% endfor %}
+        {% for error in form.email_address.errors %}{{ error.capitalize() }}{% endfor %}
+        {% for error in form.phone_number.errors %}{{ error.capitalize() }}{% endfor %}
+        {% for error in form.time.errors %}{{ error.capitalize() }}{% endfor %}
+        {% for error in form.date.errors %}{{ error.capitalize() }}{% endfor %}
+    </div>
+    {% else %}
+    <div class="flash info capitalize">if you have account please login before booking services or offers</div>  
+    {% endif %}
+    {% if id %}<form method="post" action="{{ url_for('booking.bookingservice',service_id=id) }}">{% else %}<form
+            method="post" action="{{ url_for('booking.bookingpage') }}">{% endif %}
+            {{ form.csrf_token }}
+            <legend>Personal Information</legend>
+            {% if current_user.is_authenticated %}
+            <p class="form-control">{{ current_user.admin_name or current_user.user_name }}</p>
+            <p class="form-control">{{ current_user.admin_email_address or current_user.user_email_address }}</p>
+            <p class="form-control">{{ current_user.admin_phone_number or current_user.user_phone_number }}</p>
+            {{ form.name(value=current_user.admin_name or current_user.user_name,type="hidden") }}
+            {{ form.email_address(value=current_user.admin_email_address or
+            current_user.user_email_address,type="hidden") }}
+            {{ form.phone_number(class='form-control',value=current_user.admin_phone_number or
+            current_user.user_phone_number,type="hidden") }}
+            {%else%}
+            {{ form.name.label }}
+            
+            {{ form.name }}
+            {{ form.email_address.label }}
+            {{ form.email_address }}
+            {{ form.phone_number.label }}
+            {{ form.phone_number(class='form-control') }}
+            {% endif %}
+            <legend>Service Selection</legend>
+            {% if services %}
+            <select id="service" name="service_id">
+                {% if id %}
+                {%else%}
+                <option value="select">select services/offers</option> {% endif %}
+                {% for service in services %}
+                <option value="{{service.id}}" {% if service.id==id %}selected {% endif %}>{{service.title}},
+                    Price:- {{service.price}}</option>
+                {% endfor %}
+            </select>
+            {%else%}
+            <div style="color: white;background-color: red;padding: 1em; text-align: center;">No Service Found</div>
+            {% endif %}
+            <legend>Appointment Date & Time</legend>
+            {{ form.date.label }}
+            {{ form.date }}
+            
+            {{ form.time.label }}
+            {{ form.time }}
+            
+
+
+            <button class="btn" type="submit">Submit</button>
+        </form>
+
+</div>
+
+{% endblock basetemp %}
+{% block pagesjs %}
+<script>
+    const dateobj = new Date()
+    let minmon = dateobj.getMonth() + 1
+    let mindate = dateobj.getDate()
+    let minyear = dateobj.getFullYear()
+    let minval = minyear.toString()
+    if (minmon < 10) {
+        minval = minval + "-0" + minmon.toString()
+    } else {
+        minval = minval + "-" + minmon.toString()
+    }
+    if (mindate < 10) {
+        minval = minval + "-0" + mindate.toString()
+    } else {
+        minval = minval + "-" + mindate.toString()
+    }
+    document.querySelector('input[type="date"]').setAttribute("Min", minval)
+</script>
+{% endblock pagesjs %}
